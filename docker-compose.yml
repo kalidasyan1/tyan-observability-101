@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  app:
+    build: ./app
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: sh -c "pip install -r requirements.txt && python main.py"
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - app
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
