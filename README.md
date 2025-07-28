@@ -21,7 +21,7 @@ Default login: admin / admin (set a new password when prompted)
 
 4. In Grafana, add Prometheus as a data source (http://prometheus:9090)
 5. Create a dashboard and visualize `hello_world_requests_total`
-
+6. After all tests, stop all services: `docker-compose down`
 
 
 
